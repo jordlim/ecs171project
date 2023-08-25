@@ -2,9 +2,9 @@
 Dataset: https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation
 
 Team Members: \
-Jamie Wu - jmewu@ucdavis.edu\
-Jordan Lim - jflim@ucdavis.edu\
-Rohan Arumugam - rarumugam@ucdavis.edu\
+Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
+Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
+Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 Elson Jian - egjian@ucdavis.edu\
 Hyunkyong (HK) Boo - hboo@ucdavis.edu\
 Juntao Wang - jutwang@ucdavis.edu
