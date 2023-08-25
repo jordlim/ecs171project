@@ -5,7 +5,7 @@ Team Members: \
 Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
 Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
 Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
-Elson Jian - egjian@ucdavis.edu\
+Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
 Hyunkyong (HK) Boo - hboo@ucdavis.edu\
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 
