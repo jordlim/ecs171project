@@ -7,7 +7,7 @@ Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
 Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 Elson Jian - egjian@ucdavis.edu\
 Hyunkyong (HK) Boo - hboo@ucdavis.edu\
-Juntao Wang - jutwang@ucdavis.edu
+Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 
 Attribute Description: 10129 Observations, 19 attributes with 1 class attribute (Room Occupancy)
 1. Date: formatted as YYYY/MM/DD
