@@ -6,7 +6,7 @@ Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
 Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
 Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
-Hyunkyong (HK) Boo - hboo@ucdavis.edu\
+Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 
 Attribute Description: 10129 Observations, 19 attributes with 1 class attribute (Room Occupancy)
