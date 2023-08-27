@@ -1,5 +1,6 @@
 # ECS 171 Project - Data Exploration
-Dataset: https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation
+NOTE: See bottom of README.md for updated dataset explanation and abstract after TA feedback.
+[Dataset Link](https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation)
 
 Team Members: \
 Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
@@ -46,7 +47,7 @@ Data Segmentation:
 Below is an example diagram of how the discrete dataframe can be processed into a delta dataframe. \
 ![Screenshot 2023-08-24 231613](https://github.com/jordlim/ecs171project/assets/115687850/6f3f6ed3-5946-4072-8a4f-0457709918f2)
 
-# Datset Explanation
+# Dataset Explanation
 This dataset is the result of an experiment performed by the International Institute of Information Technology in Hyderabad to determine room occupancy in a non-intrusive way. Over a period of 4 days, the research team tracked sensor data every 30 seconds for 7 different “sensor nodes,” collecting 10,129 complete records and 16 total attributes describing numerical time series data. Attributes range from light in lux to CO2 slope and aim to estimate the occupancy in a room at a specific time which could range from 0 to 3 individuals. The sensors were labeled from S1 to S7, divided based on their function; S1-S4 measured temperature, light and sound sensors; S5 tracked CO2 levels, and S6 and S7 were both passive infrared (PIR) motion sensors. The sensors were arranged in a star configuration. The PIR motion sensors were deployed on the ceiling to maximize their field of view for optimal motion detection. An edge node periodically compiled data from all sensor nodes.
 
 # Abstract
