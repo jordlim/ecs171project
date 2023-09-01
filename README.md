@@ -1,4 +1,4 @@
-# ECS 171 Project - Data Exploration
+# ECS 171 Project - Preprocessing and First Model
 NOTE: See bottom of README.md for updated dataset explanation and abstract after TA feedback.
 [Dataset Link](https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation)
 
@@ -9,6 +9,13 @@ Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
 Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
+
+3. Evaluate your model compare training vs test error
+
+4. Where does your model fit in the fitting graph.
+![ECS 171 - Model Results](https://github.com/jordlim/ecs171project/assets/115687850/c194b11c-8dfa-46d0-bc0e-b859a217eadd)
+
+# Data Exploration
 
 Attribute Description: 10129 Observations, 19 attributes with 1 class attribute (Room Occupancy)
 1. Date: formatted as YYYY/MM/DD
