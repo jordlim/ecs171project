@@ -2,6 +2,8 @@
 NOTE: See bottom of README.md for updated dataset explanation and abstract after TA feedback.
 [Dataset Link](https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation)
 
+Colab Link: https://colab.research.google.com/github/jordlim/ecs171project/blob/main/occupancy.ipynb
+
 Team Members: \
 Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
 Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
@@ -10,10 +12,61 @@ Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
 Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 
-3. Evaluate your model compare training vs test error
+## Model Selection
+Using a loop, we built and compared different models:
+- We used confusion matrix, classification report, train/test accuracy and train/test mean squared error to evaluate the performance of these models
+- They were trained once on the dataset and repeated again on PCA-reduced data (to potentially improve the model’s efficiency and performance)
+1. Artificial Neural Networks
+- Feed forward neural network that uses stochastic gradient descent and categorical cross entropy since we have 4 target categories: 0, 1, 2, or 3 people in each room occupancy observation
+- For original dataset:
+    - 3 hidden layers, input dimension of 16 for each feature of the data (excluding date/time)
+    - ‘sigmoid’ activation function to perform logistic regression fit
+    - Output layer has 4 nodes for each category (0,1,2,3 people)
+- For PCA, reduced the number of features from 16 to 3 to compare the performance of a reduced model with fewer variables to a full model
+- For both training and testing sets, overall accuracy was very high, resulting in a very low MSE
+    - Training MSE and Testing MSE are approximately equal
+    - This leads us to believe that we are not overfitting the data, but there is a possibility that we could be underfitting
+- Precision and recall were high for the most part except for two cases: much lower precision for the 2 people category and lower recall in the 3 people category. Possible reasons for this could be
+    - Observations of the features for 2 people and 3 people are similar
+    - Not enough data points for the categories of 1,2, or 3 people 	
+2. Logistic Regression
+- Uses the logistic function to plot output between 0 and 1
+- In our model, the model maintains a high accuracy from the training and testing set while MSE is low for both training and testing set.
+- Based on the confusion matrix, we can find some misclassifications on  some classes
+3. Decision Tree
+- Tree-based structure that acts like a flowchart to cut down the number of viable options in the data until a point can be classified
+- Super high accuracy here too
+4. K-Nearest Neighbors
+- Uses euclidean distance to determine how far different points are from one another before classifying them (looks at the k nearest points from the original point that is being classified)
+- Achieved a high accuracy rate of classification for the number of people inside a room
+5. Support Vector Machine
+- For PCA, we can assume that it is likely not overfitting accuracy or MSE.
+- In comparison to the other models that are possibly not overfitting, the overall accuracies are generally higher and MSEs are generally lower. The original dataset has high accuracy and low MSE, however we can’t assume that accuracy is not overfitting as the training is slightly higher.
+- Between PCA and our general dataset, our MSE and accuracy are both closer to 0 or 1 respectively in the dataset. However, given that PCA is less likely to be overfitting and the testing and training values are farther apart, we believe that this is a stronger showing.  
+6. Random Forest
+- UsesRandomForestClassifier
+- Builds a deep and split random forest and classifies through a voting mechanism
+- Comparing the random forest model and the post-PCA random forest model, both the training and testing set had accuracies close to 1 which potentially indicates overfitting
+- On the test set, the random forest model without PCA slightly outperformed the model with PCA. But on the test set, the MSE of the original dataset is lower.
+7. Gradient Boosting
+- An ensemble learning algorithm that uses gradient descent to minimize overall loss when adding additional weak learners to an ensemble
+- Begins with a simple decision tree model, and uses residuals to add new decision trees that improve upon previous prediction errors
+- Can be tuned by limiting the number of trees and max depth, thus limiting model complexity and less likely to overfit
+- For gradient boosting, we got very similar model results as random forest, which makes sense as both use an aggregation of decision trees to make one final combined model
+- Both Gradient Boosting and Random Forest achieved high training accuracy and low MSE, but did not perform as well for PCA which potentially suggest overfitting
 
-4. Where does your model fit in the fitting graph.
-![ECS 171 - Model Results](https://github.com/jordlim/ecs171project/assets/115687850/c194b11c-8dfa-46d0-bc0e-b859a217eadd)
+## Model Evaluation
+![ECS 171 - Model Results](https://github.com/jordlim/ecs171project/assets/115687850/0bfe7c63-f75f-4e19-8199-d0e5f504e4c1)
+
+Above is a summary of the train and test accuracy and MSE scores each model reported. The green highlight indicates the model with the best outcome - for accuracy this would be the model that scored closest to 1.0, and for MSE this would be the model that scored closest to 0.0. The orange highlight is the model with the second best outcome. We felt it was necessary to not just consider the best outcome, because sometimes overly high accuracy or overly low MSE can be a result of overfitting or datasets that aren’t complex enough to begin with.
+
+Observations:
+- For the normal dataset version (top chart), we saw that the Random Forest model and the Gradient Boosting model had the same exact train and test output as well as confusion matrices. This can be attributed to the underlying structure of RF and GB, which both incorporate decision trees when classifying data. This could also be attributed to improper hyperparameter tuning for the gradient boosting model or a lack of diverse variables in our data. We can determine if either possibility is true by tuning the different hyperparameters in our gradient boosting model.
+- PCA is a method that reduces the dimensions of a dataset, which generally should reduce overfitting. Looking at PCA model results, we see that the K-Nearest Neighbors algorithm had the best test accuracy and test MSE, and the second best train accuracy and train MSE. In addition, the test MSE is lower than the train MSE, which further suggests that there is not overfitting.
+- On average, the normal dataset performed better in terms of accuracy and MSE than the PCA dataset. This makes sense, as PCA is a method that reduces dimensions by trying to combine multiple original attributes into groups of attributes for simplicity.
+
+## Fit
+Based on the training and testing MSEs calculated for each model, we can see that the test and the train errors are low and very similar to one another. This observation supports the claim that there is not a lot of overfitting going on within our dataset, and that our models have achieved an ideal level of complexity as our training and testing MSE values are very similar, and very small. Our claim is further supported by the high accuracy levels achieved for both the training and testing datasets. Considering how high our accuracy, precision, and recall rates are for all models, it is possible that there is some overfitting in the dataset. It is also possible that we achieved a high accuracy, precision, and recall because of the imbalance in our dataset (there are many more observations with 0 people in the room compared to 1,2, or 3 people). This imbalance may also allow us to achieve a higher accuracy without actually having a model that accurately predicts the number of people inside a room. We plan on validating our claim that our models are considered within the “ideal range” complexity by performing cross validation on our dataset to test the accuracy of our original models. 
 
 # Data Exploration
 
