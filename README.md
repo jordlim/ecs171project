@@ -181,6 +181,15 @@ Based on the training and testing MSEs calculated for each model, we can see tha
 
 # Discussion
 
+## Preprocessing
+The first step we took was to look through the dataset and decide on any changes that we felt were necessary to make. First, we checked for duplicates or null values, which could potentially affect our data. Since the date is not something that is a good predictor for room occupancy, we decided to combine date and time into a single category to study overall changes of the data over time.  Our group also decided that instead of only focusing on the discrete values of our different factors, we also wanted to discuss how changes in these values can help predict an increase or decrease in room occupancy. Therefore, we decided to have one data frame representing the discrete values, and a second data frame showing the increase/decrease in the values for each datapoint.
+
+One of the big things our group wanted to study was how each of the factors were correlated to one another. To achieve this, we built a correlation matrix consisting of all of the factors in our data. Since our data had multiple sensors for each type (4 for temperature. 4 for light, etc.) each corresponding to different areas of the room, we believed that the sensors for each type would be highly correlated with one another. Instead, it turned out that some sensors were less correlated than others, likely because of the difference in placement location. The next thing we did was visualize the data by plotting time series plots for each data sensor as well as plotting it against the room occupancy count. To do this, we separated the dataset into its different data types, one for each type of sensor, so we could have a clear visualization of each category and its relation.We then plotted each sensor type against the date and time so we could study how the values change throughout the day. 
+
+The last preprocessing we did was standardizing the data as well as encoding outputs. We noticed that each data type had large data distributions, so we decided to normalize our data so that all the data fall between 0 and 1. We also chose to use one-hot encoding for our room occupancy category to allow for multi-class analysis. Setting X as our sensor data and y as the room occupancy count, we decided to use an 80:20 split. Lastly, we set up the data and used PCA to reduce its dimensionality to 3 principal components to reduce complexity and allow for better visualization of the data.
+
+
+
 # Conclusion
 
 # Collaboration
