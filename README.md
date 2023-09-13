@@ -12,16 +12,18 @@ Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 
 # Introduction
+The dataset we chose is called Room Occupancy Estimation and provides a variety of sensor data about a room over time. We thought this dataset was both intruiging and impactful because of the many applications of being able to dynamically and accurately predict room occupancy without physical or camera surveillance. The purpose of this project is to study how different factors such as time/day, light and sound sensors, CO2 sensors, etc. are related and their abilities to predict occupancy in a room over time. Having a strong predictive model for room occupancy is relevant for a variety of use cases. For example, construction workers can adjust working times and minimize noise disturbance on a property based on an estimate of residents present in a more non-invasive manner. Property owners can also use occupancy information to optimize energy usage and prevent the wasting of unecessary cooling/heating resources. In addition, law enforcement and other government agencies that face emergency situations like hostage negotiations or natural disasters can quickly discern the number of people in an area in a more safe, resource minimal way that helps first responders evacuate people safely. Occupancy detection can also be used to monitor isolated but hazardous rooms like storage freezers or plants with toxic gases. Overall, gaining intelligence about occupancy passively through various sensors is one strong method to address various commercial and public service applications.
 
 ## Abstract
-The dataset we chose is called Room Occupancy Estimation, and it is something that our group was interested in because of its possible applications to modern society. The purpose of the experiment was to study how different factors, such as time/day, light and sound sensors, were related to one another and the implications each factor has on room occupancy. Our group’s goal was to use different machine learning methods on the dataset to predict the occupancy of a room using those factors. Being able to predict room occupancy in a way that does not disturb the residents inside the room itself can be beneficial in many ways. Knowing when some areas are expected to be empty or full, and being able to determine the best date and time to do a certain thing are helpful in many situations, both small and big: for instance, construction workers will be able to monitor the number of residents living in areas near construction sites and adjust working times in order minimize disturbance in the area, and property owners could be able to monitor the number of people on the property at a specific time and use that information to optimize energy usage, preventing the wasting of unnecessary resources in unoccupied rooms. Being able to predict room occupancy quickly and accurately can even have life-saving applications. Every year, law enforcement and other government agencies face emergency situations like hostage negotiations where it is unsafe, resource intensive, or simply infeasible to enter a room. In emergency situations such as fires or natural disasters, being able to quickly discern the number of people in an area is crucial and can lead to better preparation and help first responders evacuate everyone safely. One way to combat the dangers of these situations is to gain intelligence about occupancy passively through various sensors. The ability to detect varying occupancy in a room without being inside has commercial applications as well, such as for monitoring isolated but hazardous rooms like storage freezers and implementing more eco-friendly demand-based ventilation systems. Using data collected from multiple non-intrusive sensors that collected ambient room measurements such as temperature, sound, and CO2 levels, we created a model that can predict the number of people inside a room. After preprocessing the data, we conducted exploratory data analysis using correlation matrices, box plots, and pair plots to understand the normal tendencies of the room and identify important features for predicting the number of people inside the room. Next, we compared the performance of multiple machine learning techniques, such as logistic regression, decision trees, random forest classification, and support vector machines, in order to determine the model that is best suited for predicting the number of people inside a room and make predictions on how fluctuations in sensor output overtime correlated with occupant detection. To validate and test our results, we split our data into train and test segments using cross-validation techniques.
+Using data collected from multiple non-intrusive sensors that collected ambient room measurements such as temperature, sound, and CO2 levels, we created a model that can predict the number of people inside a room. After preprocessing the data, we conducted exploratory data analysis using correlation matrices, box plots, and pair plots to understand the normal tendencies of the room and identify important features for predicting the number of people inside the room. Next, we compared the performance of multiple machine learning techniques, such as logistic regression, decision trees, random forest classification, and support vector machines in order to determine the model that is best suited for predicting the number of people inside a room and make predictions on how fluctuations in sensor output overtime correlated with occupant detection. We ran our selected machine learning techniques on three variations of our data, including the standard data, a dimensionally-reduced PCA version of the data, and an oversampled version of the data. To validate and test our results, we split our data into train and test segments using k-fold cross-validation techniques.
 
 ## Dataset Explanation
 This dataset is the result of an experiment performed by the International Institute of Information Technology in Hyderabad to determine room occupancy in a non-intrusive way. Over a period of 4 days, the research team tracked sensor data every 30 seconds for 7 different “sensor nodes,” collecting 10,129 complete records and 16 total attributes describing numerical time series data. Attributes range from light in lux to CO2 slope and aim to estimate the occupancy in a room at a specific time which could range from 0 to 3 individuals. The sensors were labeled from S1 to S7, divided based on their function; S1-S4 measured temperature, light and sound sensors; S5 tracked CO2 levels, and S6 and S7 were both passive infrared (PIR) motion sensors. The sensors were arranged in a star configuration. The PIR motion sensors were deployed on the ceiling to maximize their field of view for optimal motion detection. An edge node periodically compiled data from all sensor nodes.
 
 
 # Figures
-
+------------------ 
+NOT SURE ABOUT THIS PART
 1. Architectural Diagram of Neural Network Model: A schematic visualization delineating the architecture, inclusive of layers, nodes, and activation functions employed, will provide insights into the neural network's structure.
 2. Confusion Matrices Across Models: Visual confusion matrices for each classification algorithm will facilitate a more immediate understanding of class misclassifications.
 3. Feature Importance Visualization: For ensemble tree-based models like Random Forest and Gradient Boosting, a bar graph quantifying feature importance could offer additional interpretive dimensions.
@@ -29,6 +31,43 @@ This dataset is the result of an experiment performed by the International Insti
 5. Performance Metrics Comparison: Utilize bar graphs or line charts to compare performance metrics such as accuracy and MSE across various models for both the original dataset and the PCA-reduced dataset.
 6. Hyperparameter Sensitivity Analysis: If hyperparameter tuning was executed, a graphical representation depicting performance variations against different hyperparameters can be presented.
 7. Learning Curves for Model Training: Learning curves plotted against epochs or iterations can aid in diagnosing overfitting or underfitting tendencies in the models.
+------------------
+
+## Confusion Matrices for 3 Model Formats
+### Confusion Matrices for Standard Dataset
+![ECS 171 - Standard ANN](https://github.com/jordlim/ecs171project/assets/115687850/af0ee647-8185-420f-965a-7f200666abd4)
+![ECS 171 - Standard Logistic](https://github.com/jordlim/ecs171project/assets/115687850/f583752a-4a20-4138-a1e4-8a11bbacb3e6)
+![ECS 171 - Standard Decision Tree](https://github.com/jordlim/ecs171project/assets/115687850/c406c0c9-6a01-4914-be1a-fb08d09ae6af)
+![ECS 171 - Standard KNN](https://github.com/jordlim/ecs171project/assets/115687850/00266157-5a7f-487e-baaa-a20cf9a74be6)
+![ECS 171 - Standard SVM](https://github.com/jordlim/ecs171project/assets/115687850/ba7c683c-43b5-494e-8618-8c20bf9e9ab7)
+![ECS 171 - Standard RF](https://github.com/jordlim/ecs171project/assets/115687850/31229b39-e532-4cda-9750-b1e6082cc85f)
+![ECS 171 - Standard GB](https://github.com/jordlim/ecs171project/assets/115687850/56b37b69-df44-4df9-a823-cb7316810ec1)
+![ECS 171 - Standard NB](https://github.com/jordlim/ecs171project/assets/115687850/ba67a57f-9562-4338-b6bc-64b1f9d43924)
+
+### Confusion Matrices for PCA Dataset
+![ECS 171 - PCA ANN](https://github.com/jordlim/ecs171project/assets/115687850/1c4e7f1a-ff71-48f3-8ba2-bf89d1365190)
+![ECS 171 - PCA Logistic](https://github.com/jordlim/ecs171project/assets/115687850/c962efb7-9264-40c1-9c34-24b2b6f272e4)
+![ECS 171 - PCA Decision Tree](https://github.com/jordlim/ecs171project/assets/115687850/13f1bc20-9376-4391-bda5-481c7427731a)
+![ECS 171 - PCA KNN](https://github.com/jordlim/ecs171project/assets/115687850/24b4dcfb-6c11-4388-af7c-c17851c0c144)
+![ECS 171 - PCA SVM](https://github.com/jordlim/ecs171project/assets/115687850/1a81b6a4-838a-44f2-a658-d69bb7145752)
+![ECS 171 - PCA RF](https://github.com/jordlim/ecs171project/assets/115687850/fb23f63a-8058-488c-bf1b-d7f1d2b5d2de)
+![ECS 171 - PCA GB](https://github.com/jordlim/ecs171project/assets/115687850/1f4fd4ef-61d3-4db1-84a1-2635a957a394)
+![ECS 171 - PCA NB](https://github.com/jordlim/ecs171project/assets/115687850/977f89fb-9ad8-4d0e-8066-6c0d1a7c51ad)
+
+### Confusion Matrices for Randomly Oversampled Dataset
+![ECS 171 - Oversample ANN](https://github.com/jordlim/ecs171project/assets/115687850/6650a561-6b65-4716-ae51-f9ed525f90f3)
+![ECS 171 - Oversample Logistic](https://github.com/jordlim/ecs171project/assets/115687850/98929c67-d1ae-48d2-a105-0f67f5ab2fb8)
+![ECS 171 - Oversample Decision Tree](https://github.com/jordlim/ecs171project/assets/115687850/cff8ca69-da11-4400-8620-7779399af66d)
+![ECS 171 - Oversample KNN](https://github.com/jordlim/ecs171project/assets/115687850/3297c559-5b87-4755-9b04-b432e5249b82)
+![ECS 171 - Oversample SVM](https://github.com/jordlim/ecs171project/assets/115687850/1bafa7db-5c76-4ff0-80e9-39bb48d0c309)
+![ECS 171 - Oversample RF](https://github.com/jordlim/ecs171project/assets/115687850/7b4caa6f-818d-4f8b-9b21-0cc4746c3bb4)
+![ECS 171 - Oversample GB](https://github.com/jordlim/ecs171project/assets/115687850/ee0f8abc-5bd9-4207-9226-461752dbbda1)
+![ECS 171 - Oversample NB](https://github.com/jordlim/ecs171project/assets/115687850/cf9198f2-da05-4eb0-9cb7-cb685f711543)
+
+## Metrics for 3 Model Formats (MSE and Accuracy)
+### Metrics for Standard Dataset
+### Metrics for PCA Datase
+### Metrics for Oversampled Dataset
 
 # Methods
 
