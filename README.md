@@ -23,6 +23,45 @@ This dataset is the result of an experiment performed by the International Insti
 # Figures
 
 # Methods
+##Preprocessing
+Start with data exploration, preprocessing steps, and continue with model selection and evaluation.
+In data exploration, the first step involves exploring the data set to understand overall trends and relationships between variables. We then similarly plot other sensor variables such as light intensity, sound level, and carbon dioxide concentration. In the second step of data preprocessing, after understanding the initial characteristics of the data set, we preprocessed the data.
+First, we use PCA for dimensionality reduction in the model.
+```
+pca = PCA(n_components = 3)
+reduced_x_train = pca.fit_transform(x_train_scaled)
+reduced_x_test = pca.transform(x_test_scaled)
+```
+##Model selection
+Test models in Model 1: logistic regression, decision tree, K-nearest neighbor, support vector machine, random forest, gradient enhancement.
+```
+Models={'Artificial Neural Network ': Sequential(),
+'Logistic Regression': LogisticRegion(),
+'Decision Tree': DecisionTreeClassifier(),
+'K-Nearest Neighbors': KNeighborsClassifier(),
+'Support Vector Machine': SVC(),
+'Random Forest': RandomForestClassifier(),
+'Gradient Boosting': XGBClassifier()}
+```
+Each model uses default parameters. Finally, evaluation indicators are used: confusion matrix, classification report, accuracy, and MSE.
+
+Model 2: The same testing model was used for dimensionality reduction using PCA. Model parameters are the default parameters.
+
+If the model is an Artificial Neural Network. We create a simple artificial neural network (ANN) model:
+```
+If name=='Artificial Neural Network ':
+Model. add (Dense (units=12, activation='sigmoid ', input_dim=3))
+Model. add (Dense (units=3, activation='sigmoid '))
+Model. add (Dense (units=4, activation='softmax '))
+Adjusted_ Sgd=SGD (learning_rate=0.2)
+Model. compile (optimizer=adjusted_sgd, loss='categorical_crosspropy ')
+```
+
+
+
+
+
+
 ## Data Exploration and Preprocessing
 Attribute Description: 10129 Observations, 19 attributes with 1 class attribute (Room Occupancy)
 1. Date: formatted as YYYY/MM/DD
