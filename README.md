@@ -1,5 +1,4 @@
 # ECS 171 Project - Room Occupancy Estimation
-NOTE: See bottom of README.md for updated dataset explanation and abstract after TA feedback.
 [Dataset Link](https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation)
 
 Colab Link: https://colab.research.google.com/github/jordlim/ecs171project/blob/main/occupancy.ipynb
