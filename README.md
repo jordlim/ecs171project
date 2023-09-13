@@ -23,44 +23,6 @@ This dataset is the result of an experiment performed by the International Insti
 # Figures
 
 # Methods
-##Preprocessing
-Start with data exploration, preprocessing steps, and continue with model selection and evaluation.
-In data exploration, the first step involves exploring the data set to understand overall trends and relationships between variables. We then similarly plot other sensor variables such as light intensity, sound level, and carbon dioxide concentration. In the second step of data preprocessing, after understanding the initial characteristics of the data set, we preprocessed the data.
-First, we use PCA for dimensionality reduction in the model.
-```
-pca = PCA(n_components = 3)
-reduced_x_train = pca.fit_transform(x_train_scaled)
-reduced_x_test = pca.transform(x_test_scaled)
-```
-##Model selection
-Test models in Model 1: logistic regression, decision tree, K-nearest neighbor, support vector machine, random forest, gradient enhancement.
-```
-Models={'Artificial Neural Network ': Sequential(),
-'Logistic Regression': LogisticRegion(),
-'Decision Tree': DecisionTreeClassifier(),
-'K-Nearest Neighbors': KNeighborsClassifier(),
-'Support Vector Machine': SVC(),
-'Random Forest': RandomForestClassifier(),
-'Gradient Boosting': XGBClassifier()}
-```
-Each model uses default parameters. Finally, evaluation indicators are used: confusion matrix, classification report, accuracy, and MSE.
-
-Model 2: The same testing model was used for dimensionality reduction using PCA. Model parameters are the default parameters.
-
-If the model is an Artificial Neural Network. We create a simple artificial neural network (ANN) model:
-```
-If name=='Artificial Neural Network ':
-Model. add (Dense (units=12, activation='sigmoid ', input_dim=3))
-Model. add (Dense (units=3, activation='sigmoid '))
-Model. add (Dense (units=4, activation='softmax '))
-Adjusted_ Sgd=SGD (learning_rate=0.2)
-Model. compile (optimizer=adjusted_sgd, loss='categorical_crosspropy ')
-```
-
-
-
-
-
 
 ## Data Exploration and Preprocessing
 Attribute Description: 10129 Observations, 19 attributes with 1 class attribute (Room Occupancy)
@@ -86,12 +48,24 @@ Attribute Description: 10129 Observations, 19 attributes with 1 class attribute 
 
 Dataset General Observations:
 1. We want to track changes in sensor output over time, so we processed the “Date” and “Time” attributes into numerical values. We used Pandas to.datetime() to turn the two attributes into one attribute to plot overall changes in sensor output over time. We noticed many peaks in sensor output intensity during the first 3 and last 2 days of the experiment, with more minimal steady growth for the middle 10-14 days.
+   ```
+   df['DateTime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
+   ```
 2. Our dataset is structured in groups of sensor types, with multiple of the same type of sensor placed around the room. In the data exploration phase our team noticed that different sensors (though the same type) exhibited differences in predictive impact for room occupancy. For example, in the correlation matrix S1_Temp has a 0.7 correlation with room occupancy and S1-3_Temp all have correlations of 0.65+, but S4_temp has a much lower correlation value of 0.53. To make sense of these sort of differences, we sourced a diagram of sensor placement that was associated with the dataset. This helps provide some context to differences in sensor outputs that we saw during data exploration. For example, one explanation for the differences in Temp sensor correlation could be because the placement of sensor S4 is in the upper right corner of the room, far from central node N and by a window.\
 ![Screenshot 2023-08-24 231529](https://github.com/jordlim/ecs171project/assets/115687850/bbcb0763-c36e-4c92-ba9d-3cb4c5e03cdf)
+3.We visualized the data by plotting time series plots of the data for each sensor (e.g. temperature, light, sound, etc.) in order to visualize data trends.
 
 Transformations and Normalization:
 1. During data exploration, we noticed that attributes like temperature (in Celsius) changed by the hundredths, while other attributes such as light (in Lux) changed much more drastically on the order of ones and tens. Because the range of the different axis are very different between each sensor type, we felt that the relationship was unclear. Some data points from the pair plots were also skewed or cluttered together with several points being significantly more distinct.
 2. Because the sensors from the experiment measured different variables with different units, we decided to normalize the data in order to reduce the rate of change differences between variable measurements for different observations. 
+    We use TensorFlow’s ‘to_categorical’ function to convert the room occupancy status (room_occupancy) into one-hot encoded form for multi-class analysis.
+   For standardization, we use MinMaxScaler to standardize all numerical features so that their values fall between 0 and 1.
+3.We use PCA to reduce its dimensionality to 3 principal components. This helps us reduce computational complexity and allows us to visualize the data more easily.
+```
+pca = PCA(n_components = 3)
+reduced_x_train = pca.fit_transform(x_train_scaled)
+reduced_x_test = pca.transform(x_test_scaled)
+```
 
 Data Segmentation:
 1. Our project aims to gain insight into how specific sensor values correlate with the room occupancy at a discrete point in time, and also how changes in sensor outputs over time can predict increases and decreases in room occupancy. To do this, we felt that it was necessary to process the original dataframe into two separate dataframes, retaining specific attributes for the “discrete” dataframe and processing its data into a secondary “delta” dataframe.
@@ -110,6 +84,16 @@ Using a loop, we built and compared different models:
     - 3 hidden layers, input dimension of 16 for each feature of the data (excluding date/time)
     - ‘sigmoid’ activation function to perform logistic regression fit
     - Output layer has 4 nodes for each category (0,1,2,3 people)
+    - We created an artificial neural network (ANN) model:
+```
+If name=='Artificial Neural Network ':
+Model. add (Dense (units=12, activation='sigmoid ', input_dim=3))
+Model. add (Dense (units=3, activation='sigmoid '))
+Model. add (Dense (units=4, activation='softmax '))
+Adjusted_ Sgd=SGD (learning_rate=0.2)
+Model. compile (optimizer=adjusted_sgd, loss='categorical_crosspropy ')
+```
+      
 - For PCA, reduced the number of features from 16 to 3 to compare the performance of a reduced model with fewer variables to a full model
 - For both training and testing sets, overall accuracy was very high, resulting in a very low MSE
     - Training MSE and Testing MSE are approximately equal
@@ -142,6 +126,35 @@ Using a loop, we built and compared different models:
 - Can be tuned by limiting the number of trees and max depth, thus limiting model complexity and less likely to overfit
 - For gradient boosting, we got very similar model results as random forest, which makes sense as both use an aggregation of decision trees to make one final combined model
 - Both Gradient Boosting and Random Forest achieved high training accuracy and low MSE, but did not perform as well for PCA which potentially suggest overfitting
+
+
+Model 1: All 16 features are used
+The total test models are Artificial Neural Network, logistic regression, decision tree, K-nearest neighbor, support vector machine, random forest, gradient enhancement.
+```
+Models={'Artificial Neural Network ': Sequential(),
+'Logistic Regression': LogisticRegion(),
+'Decision Tree': DecisionTreeClassifier(),
+'K-Nearest Neighbors': KNeighborsClassifier(),
+'Support Vector Machine': SVC(),
+'Random Forest': RandomForestClassifier(),
+'Gradient Boosting': XGBClassifier()}
+```
+
+Model 2: The data after dimensionality reduction using PCA has only 3 principal components.
+The same testing models.
+
+Both model1 and model2 finally use evaluation indicators: confusion matrix, classification report, accuracy, and MSE.
+```
+confused_mat_train = confusion_matrix(y_true_train, y_labels_train)
+class_rep_train = classification_report(y_true_train, y_labels_train)
+accuracy_rate_train = accuracy_score(y_true_train, y_labels_train)
+train_mse_score = mean_squared_error(y_true_train, y_labels_train)
+
+confused_mat_test = confusion_matrix(y_true_test, y_labels_test)
+class_rep_test = classification_report(y_true_test, y_labels_test)
+accuracy_rate_test = accuracy_score(y_true_test, y_labels_test)
+test_mse_score = mean_squared_error(y_true_test, y_labels_test)
+```
 
 # Results
 ## Model Evaluation
