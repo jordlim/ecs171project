@@ -135,6 +135,12 @@ Model. compile (optimizer=adjusted_sgd, loss='categorical_crosspropy ')
 - Can be tuned by limiting the number of trees and max depth, thus limiting model complexity and less likely to overfit
 - For gradient boosting, we got very similar model results as random forest, which makes sense as both use an aggregation of decision trees to make one final combined model
 - Both Gradient Boosting and Random Forest achieved high training accuracy and low MSE, but did not perform as well for PCA which potentially suggest overfitting
+8. Naive Bayes
+  - A supervised machine learning algorithm that estimates the likelihood of features observed within each class.
+  - Assumes features of dataset are conditionally independent of one another (although in our case, that assumption is not true since we have multiple variables that interact with one another to influence the final outcome).
+  - We need to calculate the class priors (probability of a room having a certain number of people without accounting for feature behavior), likelihoods for our features, and the posterior probablitiles. The posterior probabilities are calculated using Bayes' Theorem and tell us the probability of there being a certain number of people in a room.
+  - This model performed the worst out of all models created, which is partly due to a violation of one of the underlying assumptions of Naive Bayes: features act independently of one another.
+  - The PCA and oversampled dataset did a slightly better job at dealing with the class imbalance to make accurate classifications. This can be seen in the precision and recall rates for when there are people being marked as present inside the room. 
 
 
 Model 1: All 16 features are used
