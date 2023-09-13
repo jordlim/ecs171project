@@ -74,6 +74,10 @@ pca = PCA(n_components = 3)
 reduced_x_train = pca.fit_transform(x_train_scaled)
 reduced_x_test = pca.transform(x_test_scaled)
 ```
+6. We also applied random oversampling to our dataset in order to deal with a class imbalance between the number of people observed inside the room at a given time inside our dataset, as observed in the graph below. Random oversampling takes samples from the classes with fewer observations and duplicates them to create a more balanced distribution in the number of people observed inside the room. 
+![occupants in room](https://github.com/jordlim/ecs171project/assets/114113303/a08e2b14-aef9-4d6d-bb4f-4a4f31a16c90)
+
+
 
 
 Data Segmentation:
