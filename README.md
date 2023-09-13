@@ -175,6 +175,18 @@ test_mse_score = mean_squared_error(y_true_test, y_labels_test)
 ## Model Evaluation
 ![ECS 171 - Model Results](https://github.com/jordlim/ecs171project/assets/115687850/0bfe7c63-f75f-4e19-8199-d0e5f504e4c1)
 
+![mse_og](https://github.com/jordlim/ecs171project/assets/114113303/9d90d8fd-57bf-4bf9-9a07-d428720f94b9)
+
+![mse_pca](https://github.com/jordlim/ecs171project/assets/114113303/fdaeefdf-6436-4621-a787-ef1f54393e2d)
+
+![mse_ovesampleed](https://github.com/jordlim/ecs171project/assets/114113303/47f9a135-37ba-4801-aac8-4af92b7ce9bb)
+
+![accuracy_og](https://github.com/jordlim/ecs171project/assets/114113303/6c6f15ac-bd2b-4232-b27c-cb15197b3b3f)
+
+![accuracy_pca](https://github.com/jordlim/ecs171project/assets/114113303/e6120c66-d329-41ed-8856-05d6b2682f77)
+
+![accuracy_os](https://github.com/jordlim/ecs171project/assets/114113303/cd0e0dd6-ce04-4c48-a144-74dca2a033ca)
+
 Above is a summary of the train and test accuracy and MSE scores each model reported. The green highlight indicates the model with the best outcome - for accuracy this would be the model that scored closest to 1.0, and for MSE this would be the model that scored closest to 0.0. The orange highlight is the model with the second best outcome. We felt it was necessary to not just consider the best outcome, because sometimes overly high accuracy or overly low MSE can be a result of overfitting or datasets that aren’t complex enough to begin with.
 
 Observations:
