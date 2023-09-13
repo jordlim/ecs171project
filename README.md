@@ -57,15 +57,16 @@ Dataset General Observations:
 
 Transformations and Normalization:
 1. During data exploration, we noticed that attributes like temperature (in Celsius) changed by the hundredths, while other attributes such as light (in Lux) changed much more drastically on the order of ones and tens. Because the range of the different axis are very different between each sensor type, we felt that the relationship was unclear. Some data points from the pair plots were also skewed or cluttered together with several points being significantly more distinct.
-2. Because the sensors from the experiment measured different variables with different units, we decided to normalize the data in order to reduce the rate of change differences between variable measurements for different observations. 
-    We use TensorFlow’s ‘to_categorical’ function to convert the room occupancy status (room_occupancy) into one-hot encoded form for multi-class analysis.
-   For standardization, we use MinMaxScaler to standardize all numerical features so that their values fall between 0 and 1.
-3.We use PCA to reduce its dimensionality to 3 principal components. This helps us reduce computational complexity and allows us to visualize the data more easily.
+2. Because the sensors from the experiment measured different variables with different units, we decided to normalize the data in order to reduce the rate of change differences between variable measurements for different observations.
+3. We use TensorFlow’s ‘to_categorical’ function to convert the room occupancy status (room_occupancy) into one-hot encoded form for multi-class analysis.
+4. For standardization, we use MinMaxScaler to standardize all numerical features so that their values fall between 0 and 1. 
+5. We use PCA to reduce its dimensionality to 3 principal components. This helps us reduce computational complexity and allows us to visualize the data more easily.
 ```
 pca = PCA(n_components = 3)
 reduced_x_train = pca.fit_transform(x_train_scaled)
 reduced_x_test = pca.transform(x_test_scaled)
 ```
+
 
 Data Segmentation:
 1. Our project aims to gain insight into how specific sensor values correlate with the room occupancy at a discrete point in time, and also how changes in sensor outputs over time can predict increases and decreases in room occupancy. To do this, we felt that it was necessary to process the original dataframe into two separate dataframes, retaining specific attributes for the “discrete” dataframe and processing its data into a secondary “delta” dataframe.
