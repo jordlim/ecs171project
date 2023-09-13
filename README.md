@@ -22,6 +22,14 @@ This dataset is the result of an experiment performed by the International Insti
 
 # Figures
 
+1. Architectural Diagram of Neural Network Model: A schematic visualization delineating the architecture, inclusive of layers, nodes, and activation functions employed, will provide insights into the neural network's structure.
+2. Confusion Matrices Across Models: Visual confusion matrices for each classification algorithm will facilitate a more immediate understanding of class misclassifications.
+3. Feature Importance Visualization: For ensemble tree-based models like Random Forest and Gradient Boosting, a bar graph quantifying feature importance could offer additional interpretive dimensions.
+4. Principal Component Analysis (PCA) Results: A bar chart elucidating the variance explained by each principal component can validate the dimensionality reduction approach.
+5. Performance Metrics Comparison: Utilize bar graphs or line charts to compare performance metrics such as accuracy and MSE across various models for both the original dataset and the PCA-reduced dataset.
+6. Hyperparameter Sensitivity Analysis: If hyperparameter tuning was executed, a graphical representation depicting performance variations against different hyperparameters can be presented.
+7. Learning Curves for Model Training: Learning curves plotted against epochs or iterations can aid in diagnosing overfitting or underfitting tendencies in the models.
+
 # Methods
 
 ## Data Exploration and Preprocessing
