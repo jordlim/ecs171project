@@ -47,7 +47,7 @@ Attribute Description: 10129 Observations, 19 attributes with 1 class attribute 
 ### Transformations and Normalization:
 1. We normalized the data using sklearn.preprocessing.MinMaxScaler(), making attribute values fall between 0 and 1. 
 2. We used TensorFlow’s ‘to_categorical’ function to convert the room occupancy status (room_occupancy) into one-hot encoded form for multi-class analysis.
-3. We used PCA to reduce its dimensionality to 3 principal components.
+3. We used Principal Component Analysis (PCA) to reduce our dataset's dimensionality to 3 principal components.
 ```
 pca = PCA(n_components = 3)
 reduced_x_train = pca.fit_transform(x_train_scaled)
@@ -274,10 +274,13 @@ Breaking down our observations for each of the 8 models further:
   - This model performed the worst out of all models created, which is partly due to a violation of one of the underlying assumptions of Naive Bayes: features act independently of one another.
   - The PCA and oversampled dataset did a slightly better job at dealing with the class imbalance to make accurate classifications. This can be seen in the precision and recall rates for when there are people being marked as present inside the room. 
 
-## Discussion on Model Fitting
+## Cross Validation
 Based on the training and testing MSEs calculated for each model, we can see that the test and the train errors are low and very similar to one another. This observation supports the claim that there is not a lot of overfitting going on within our dataset, and that our models have achieved an ideal level of complexity as our training and testing MSE values are very similar, and very small. Our claim is further supported by the high accuracy levels achieved for both the training and testing datasets. Considering how high our accuracy, precision, and recall rates are for all models, it is possible that there is some overfitting in the dataset. It is also possible that we achieved a high accuracy, precision, and recall because of the imbalance in our dataset (there are many more observations with 0 people in the room compared to 1,2, or 3 people). This imbalance may also allow us to achieve a higher accuracy without actually having a model that accurately predicts the number of people inside a room. 
 
 In order to make sure that the models are not overfitting the data or that there is no data leakage, we cross-validated our models. We first utilized StratifiedKFold Cross-Validation for our 3-fold neural network in order to get a better idea of how our model handles unknown data. Since each fold in StratifiedKFold Cross-Validation can contain a random balance of room occupants, we can see how our model truly performs against data the model hasn't seen yet. Cross-validating our dataset revealed that the models are not being overfitted as they also have a high accuracy and a low MSE for both the training and testing set.
+
+
+
 
 It's very rare to see a model perform so well, which is good as predicting the number of people in a room has many day to day use cases. Numerous companies can take advantage of passive sensors to calculate the number of room occupants at a given time. Whether it's an electrical company optimizing energy usage inside a building or emergency services deciphering a hostage situation by using sensor outputs to determine the number of people inside, there are many different ways we can use the results obtained from this project in real-world scenarios. 
 
