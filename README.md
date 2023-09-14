@@ -217,7 +217,11 @@ Upon seeing the dataset, we also noticed that there was a major class imbalances
 
 We initially thought this could lead to some weird predictions in our models. We wanted to explore how manipulating the training data in different ways could impact our predictive results. We decided to test each of the 8 machine learning models on 3 different variations of the dataset - the standard data with minimal changes, a PCA-reduced variant, and a randomly oversampled variant. 
 
-We decided to try a PCA-reduced variant to see if there is any extraneous noise coming from the predictor variables in our dataset that were obtained from the sensors. Our data had around 17 attributes, so we decided to use PCA to reduce its dimensionality to 3 principal components, which helps us reduce complexity and allows to visualize the data more easily.
+![image](https://github.com/jordlim/ecs171project/assets/114113303/84df929f-c8d5-422c-88f2-e3b021f1e3da)
+
+After random oversampling, we can see that the class imbalance has been fixed.
+
+We also decided to try a PCA-reduced variant to see if there is any extraneous noise coming from the predictor variables in our dataset that were obtained from the sensors. Our data had around 17 attributes, so we decided to use PCA to reduce its dimensionality to 3 principal components, which helps us reduce complexity and allows to visualize the data more easily. We chose to use 3 principal components in order to keep the explained variance ratio above 0.8 in order to reduce the likelihood of overfitting our model.
 ```
 pca = PCA(n_components = 3)
 reduced_x_train = pca.fit_transform(x_train_scaled)
