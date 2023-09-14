@@ -279,10 +279,17 @@ Based on the training and testing MSEs calculated for each model, we can see tha
 
 In order to make sure that the models are not overfitting the data or that there is no data leakage, we cross-validated our models. We first utilized StratifiedKFold Cross-Validation for our 3-fold neural network in order to get a better idea of how our model handles unknown data. Since each fold in StratifiedKFold Cross-Validation can contain a random balance of room occupants, we can see how our model truly performs against data the model hasn't seen yet. Cross-validating our dataset revealed that the models are not being overfitted as they also have a high accuracy and a low MSE for both the training and testing set.
 
+![image](https://github.com/jordlim/ecs171project/assets/114113303/f4791374-2e58-4abe-9c6f-7988d9fff7f0)
 
+The high average accuracy across all models confirms that our modelss are not being overfitted. However, there may be an issue with extraneous noise in our dataset due to this dataset containing multiple sensor outputs for the same measurement (ex. Temperature_1, Temperature_2, Temperature_3, Temperature_4). We can check to see if our high average accuracy is caused by extraneous noise by cross-validating our PCA dataset.
 
+![image](https://github.com/jordlim/ecs171project/assets/114113303/1300d6d0-cdf8-4405-8e1d-f4ae3aeb2383)
 
-It's very rare to see a model perform so well, which is good as predicting the number of people in a room has many day to day use cases. Numerous companies can take advantage of passive sensors to calculate the number of room occupants at a given time. Whether it's an electrical company optimizing energy usage inside a building or emergency services deciphering a hostage situation by using sensor outputs to determine the number of people inside, there are many different ways we can use the results obtained from this project in real-world scenarios. 
+The average accuracy for these models are slightly worse compared to the original dataset, with Naive Bayes and Logistic Regression decreasing the most. However, the performance of these models does not indicate that there is any overfitting occurring. 
+
+![image](https://github.com/jordlim/ecs171project/assets/114113303/4d2da203-3a28-486b-8ba1-268331ffbc6b)
+
+The oversampled dataset achieves the same accuracy as the PCA dataset, but it is still slightly worse than the original dataset. It's possible that by randomly sampling to fix the imbalance in our dataset, we also introduced more noise causing our models to perform worse. Overall, all of the models are able to successfully classify the number of people in a room with a high accuracy. 
 
 # Conclusion
 
