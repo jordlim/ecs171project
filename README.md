@@ -197,11 +197,10 @@ x_train_os, x_test_os, y_train_os, y_test_os = train_test_split(X_resampled, y_r
 ![ECS 171 - Oversampled MSE](https://github.com/jordlim/ecs171project/assets/115687850/87ea0e1f-54ae-440d-94bb-9eda1856e525)
 ![ECS 171 - Oversampled Accuracy](https://github.com/jordlim/ecs171project/assets/115687850/e0d33a8d-b448-4405-94de-653b01e18782)
 
-Below is a summary of the train and test accuracy and MSE scores each model reported. The green highlight indicates the model with the best outcome - for accuracy this would be the model that scored closest to 1.0, and for MSE this would be the model that scored closest to 0.0. The orange highlight is the model with the second best outcome. We felt it was necessary to not just consider the best outcome, because sometimes overly high accuracy or overly low MSE can be a result of overfitting or datasets that aren’t complex enough to begin with.
+Below is a summary of the train and test accuracy and MSE scores for each of the 8 models. The green highlight indicates the model with the best outcome - for accuracy this would be the model that scored closest to 1.0, and for MSE this would be the model that scored closest to 0.0. The orange highlight is the model with the second best outcome. We felt it was necessary to not just consider the best outcome, because sometimes overly high accuracy or overly low MSE can be a result of overfitting or datasets that aren’t complex enough to begin with. To compare the average train and test accuracy and MSE scores for the 3 different dataset variations, the blue highlight indicates best outcome and the purple highlight indicates second best outcome.
 
-** jamie needs to insert picture here **
+![ECS 171 - Model Results - Standard, PCA, Oversampled](https://github.com/jordlim/ecs171project/assets/115687850/094a6838-2a30-4632-bc78-3ed2b0499e4f)
 
------------------------------------------------------------------------------------
 # Discussion
 Upon seeing the dataset, we noticed that there was a major class imbalance between the number of instances for our room occupancy variable. We initially thought this could lead to some weird predictions in our models. In order to counteract those effects, we also performed random oversampling on our dataset in our to correct the class imbalance. In doing this, we can compare the models created with the oversampled dataset and the normal dataset to see how the performance is affected. We also noticed that there were many variables we could use to predict the number of room occupants.   
 
