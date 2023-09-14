@@ -300,37 +300,33 @@ We observed that different sensors have varying effects on room occupancy, poten
 Our project successfully addressed the problem of predicting room occupancy and showcased various data processing and model training methods. We believe that models like these have applications not only in the business environment but also in emergency services and public safety. In emergency situations such as hostage negotiations or natural disasters, such models could be employed to quickly and accurately identify the number of people in hazardous areas. When executed correctly, these models can help mitigate potential risks. Overall, this project serves as a compelling demonstration of the potential of machine learning in real-world scenarios.
 
 # Collaboration
-Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
-- 
-Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
-- 
+### Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat
+- Coordinated team meetings to finish milestone assignments
+- Wrote starter code for exploratory data analysis
+- Added comments to code for readability, debugged MSE and accuracy output
+- Wrote milestone and final write-up content and figures
+- Converted Google Doc text to submission-ready Markdown
+- Attended team meetings and collaborated on Google Docs
+### Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim 
 - Initialized repository with needed files and provided instructions for efficient remote collaboration
 - Attended team meetings and collaborated on Google Docs to do write-ups for the various milestone assignments
 - Wrote starter code to initialize dataset, split into different types for plots, and resized correlation matrix
 - Added various comments in code and reworked some dataframes
 - Formatted report into required sections for team to work on and added text
 - Formatted unlabeled figures
--
-Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
--
+### Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam
 - Did initial data preprocessing, exploratory data analysis, and data transformations
 - Wrote functions to build models, perform cross validation, and create summary graphs
 - Collaborate in team meetings and work on milestone assignments
 - Organizing and adding finishing touches to the final write-up
-
-Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
-- 
-- Attended team meetings and collaborated on Google Docs to do write-ups for the various milestone assignments
+### Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian
+ - Attended team meetings and collaborated on Google Docs to do write-ups for the various milestone assignments
 - Organized and put finishing touches on parts of the write-up
-  
-Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
--
+### Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507
 - Collaborated on Google docs to work on milestone assignments
 - Cleaned up code to increase efficiency and reduce reudundancy
 - Added comments on code to enhance readability
 - Organized necessary labels and attributes during data exploration and preprocessing process
-
-Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
-- 
+### Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 - Collaborate on Google Docs and participate in milestone tasks
 - Add the required text to the report
