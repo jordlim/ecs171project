@@ -303,6 +303,9 @@ Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
 Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 -
 - Collaborated on Google docs to work on milestone assignments
-- Cleaned up code to increase efficiency and reduce reudundancy 
+- Cleaned up code to increase efficiency and reduce reudundancy
+- Added comments on code to enhance readability
+- Organized necessary labels and attributes during data exploration and preprocessing process
+
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 - 
