@@ -57,15 +57,6 @@ Attribute Description: 10129 Observations, 19 attributes with 1 class attribute 
 18. S7_PIR: Motion detection readings from digital passive infrared (PIR) sensors at sensor 7, binary value that ranges from 0-1 (0 for no motion, 1 for motion detected)
 19. Room_Occupancy_Count: Ground truth for number of occupants inside room
 
-### General Items:
-1. We used Pandas to.datetime() to turn the two attributes into one attribute to plot overall changes in sensor output over time. 
-   ```
-   df['DateTime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'])
-   ```
-2. Our dataset is structured in groups of sensor types, with multiple of the same type of sensor placed around the room. To make sense of these sort of differences, we sourced a diagram of sensor placement that was associated with the dataset. This helps provide some context to differences in sensor outputs that we saw during data exploration, which will be elaborated on in the Discussion section.
-
-![Screenshot 2023-08-24 231529](https://github.com/jordlim/ecs171project/assets/115687850/bbcb0763-c36e-4c92-ba9d-3cb4c5e03cdf)
-
 ### Transformations and Normalization:
 1. We normalized the data using sklearn.preprocessing.MinMaxScaler(), making attribute values fall between 0 and 1. 
 2. We used TensorFlow’s ‘to_categorical’ function to convert the room occupancy status (room_occupancy) into one-hot encoded form for multi-class analysis.
@@ -200,7 +191,8 @@ x_train_os, x_test_os, y_train_os, y_test_os = train_test_split(X_resampled, y_r
 ### Summary of Results
 Below is a summary of the train and test accuracy and MSE scores for each of the 8 models. The green highlight indicates the model with the best outcome - for accuracy this would be the model that scored closest to 1.0, and for MSE this would be the model that scored closest to 0.0. The orange highlight is the model with the second best outcome. We felt it was necessary to not just consider the best outcome, because sometimes overly high accuracy or overly low MSE can be a result of overfitting or datasets that aren’t complex enough to begin with. To compare the average train and test accuracy and MSE scores for the 3 different dataset variations, the blue highlight indicates best outcome and the purple highlight indicates second best outcome.
 
-![ECS 171 - Model Results - Standard, PCA, Oversampled](https://github.com/jordlim/ecs171project/assets/115687850/094a6838-2a30-4632-bc78-3ed2b0499e4f)
+Summary of Results Table:
+![ECS 171 - Model Results - Standard, PCA, Oversampled](https://github.com/jordlim/ecs171project/assets/115687850/af230352-4097-413d-9ac9-0352be23910e)
 
 # Discussion
 ## Data Exploration
@@ -236,15 +228,48 @@ Performing PCA on our dataset did not impact the performance drastically, as som
 Because of the major class imbalances, we also wanted to apply random oversampling to our dataset in order to deal with a class imbalance between the number of people observed inside the room at a given time inside our dataset. Random oversampling takes samples from the classes with fewer observations and duplicates them to create a more balanced distribution in the number of people observed inside the room. 
 
 ## Model Selections
-After creating our 3 dataset variants (standard, PCA-reduced, and oversampled), we wanted to try a variety of models. 
+After creating our 3 dataset variants (standard, PCA-reduced, and oversampled), we wanted to try a variety of models. The 8 models that we chose were ANN, Logistic Regression, Decision Tree, K-Nearest Neighbors, Support Vector Machine, Random Forest, Gradient Boosting, and Naive Bayes (Gaussian). Most of the models we tried came from models we learned about in class, and we also added Random Forest and Gradient Boosting as they are more augmented variations of Decision Trees. 
 
-Our group experimented with many different types of models, each model trained on both the normal data and the PCA data. We used confusion matrices, classification reports, accuracy and MSE calculations to evaluate the performance of each model. 
-** to do **
+## Analysis
+The "Summary of Results Table" is copied here from the Results section for easy viewing.
+![ECS 171 - Model Results - Standard, PCA, Oversampled](https://github.com/jordlim/ecs171project/assets/115687850/15a6ee14-a0c9-4ade-a5fc-8217f35ba1d5)
 
-## General Observations
-- For the normal dataset version (top chart), we saw that the Random Forest model and the Gradient Boosting model had the same exact train and test output as well as confusion matrices. This can be attributed to the underlying structure of RF and GB, which both incorporate decision trees when classifying data. This could also be attributed to improper hyperparameter tuning for the gradient boosting model or a lack of diverse variables in our data. We can determine if either possibility is true by tuning the different hyperparameters in our gradient boosting model.
-- PCA is a method that reduces the dimensions of a dataset, which generally should reduce overfitting. Looking at PCA model results, we see that the K-Nearest Neighbors algorithm had the best test accuracy and test MSE, and the second best train accuracy and train MSE. In addition, the test MSE is lower than the train MSE, which further suggests that there is not overfitting.
-- On average, the normal dataset performed better in terms of accuracy and MSE than the PCA dataset. This makes sense, as PCA is a method that reduces dimensions by trying to combine multiple original attributes into groups of attributes for simplicity.
+Looking at the blue-highlighted average scores, we can see that across all 8 selected models the oversampled variation of the dataset performed the best out of the three variations we tried (standard, PCA-reduced, and oversampled) in terms of MSE. It's accuracy was a little lower than the standard variation of the dataset, which can be attributed to how oversampling can sometimes augment the inaccuracies that occur due to outliers by duplicating them in the dataset. 
+
+Random Forest and Gradient Boosting performed very similarly overall, which makes sense as both use an aggregation of decision trees to make one final combined model. Overall the Decision Tree and K-Nearest Neighbors models performed well, achiving the second best if not best results for testing MSE and accuracy. 
+
+For the standard dataset variation, we saw that the Random Forest model and the Gradient Boosting model had the same exact train and test output as well as confusion matrices, which we thought was strange. Looking into the two models further, we feel that the similarity can be attributed to the underlying structure of RF and GB, which both incorporate decision trees when classifying data. This could also be attributed to improper hyperparameter tuning for the gradient boosting model or a lack of diverse variables in our data. While we did not get the opportunity to do so for this project, one area of further interest is to tune the hyperparameters for the gradient boosting model to see if the outputs will vary.
+
+ALso, PCA is a method that reduces the dimensions of a dataset which generally should reduce overfitting. Looking at PCA model results, we see that the K-Nearest Neighbors algorithm had the best test accuracy and test MSE, and the second best train accuracy and train MSE. In addition, the test MSE is lower than the train MSE, which further suggests that there is not overfitting.
+
+Breaking down our observations for each of the 8 models further:
+
+### Artificial Neural Network
+- For both training and testing sets, overall accuracy was very high, resulting in a very low MSE
+    - Training MSE and Testing MSE are approximately equal
+    - This leads us to believe that we are not overfitting the data, but there is a possibility that we could be underfitting
+- Precision and recall were high for the most part except for two cases: much lower precision for the 2 people category and lower recall in the 3 people category. Possible reasons for this could be
+    - Observations of the features for 2 people and 3 people are similar
+    - Not enough data points for the categories of 1,2, or 3 people 	
+### Logistic Regression
+- In our model, the model maintains a high accuracy from the training and testing set while MSE is low for both training and testing set
+### Decision Tree
+- Super high accuracy here too
+### K-Nearest Neighbors
+- Achieved a high accuracy rate of classification for the number of people inside a room
+### Support Vector Machine
+- For PCA, we can assume that it is likely not overfitting accuracy or MSE.
+- In comparison to the other models that are possibly not overfitting, the overall accuracies are generally higher and MSEs are generally lower. The original dataset has high accuracy and low MSE, however we can’t assume that accuracy is not overfitting as the training is slightly higher.
+- Between PCA and our general dataset, our MSE and accuracy are both closer to 0 or 1 respectively in the dataset. However, given that PCA is less likely to be overfitting and the testing and training values are farther apart, we believe that this is a stronger showing.  
+### Random Forest
+- Comparing the random forest model and the post-PCA random forest model, both the training and testing set had accuracies close to 1 which potentially indicates overfitting
+- On the test set, the random forest model without PCA slightly outperformed the model with PCA. But on the test set, the MSE of the original dataset is lower.
+### Gradient Boosting
+- For gradient boosting, we got very similar model results as random forest, which makes sense as both use an aggregation of decision trees to make one final combined model
+- Both Gradient Boosting and Random Forest achieved high training accuracy and low MSE, but did not perform as well for PCA which potentially suggest overfitting
+### Naive Bayes (Gaussian)
+  - This model performed the worst out of all models created, which is partly due to a violation of one of the underlying assumptions of Naive Bayes: features act independently of one another.
+  - The PCA and oversampled dataset did a slightly better job at dealing with the class imbalance to make accurate classifications. This can be seen in the precision and recall rates for when there are people being marked as present inside the room. 
 
 ## Fit
 Based on the training and testing MSEs calculated for each model, we can see that the test and the train errors are low and very similar to one another. This observation supports the claim that there is not a lot of overfitting going on within our dataset, and that our models have achieved an ideal level of complexity as our training and testing MSE values are very similar, and very small. Our claim is further supported by the high accuracy levels achieved for both the training and testing datasets. Considering how high our accuracy, precision, and recall rates are for all models, it is possible that there is some overfitting in the dataset. It is also possible that we achieved a high accuracy, precision, and recall because of the imbalance in our dataset (there are many more observations with 0 people in the room compared to 1,2, or 3 people). This imbalance may also allow us to achieve a higher accuracy without actually having a model that accurately predicts the number of people inside a room. We plan on validating our claim that our models are considered within the “ideal range” complexity by performing cross validation on our dataset to test the accuracy of our original models. 
