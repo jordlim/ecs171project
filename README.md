@@ -20,19 +20,6 @@ Using data collected from multiple non-intrusive sensors that collected ambient 
 ## Dataset Explanation
 This dataset is the result of an experiment performed by the International Institute of Information Technology in Hyderabad to determine room occupancy in a non-intrusive way. Over a period of 4 days, the research team tracked sensor data every 30 seconds for 7 different “sensor nodes,” collecting 10,129 complete records and 16 total attributes describing numerical time series data. Attributes range from light in lux to CO2 slope and aim to estimate the occupancy in a room at a specific time which could range from 0 to 3 individuals. The sensors were labeled from S1 to S7, divided based on their function; S1-S4 measured temperature, light and sound sensors; S5 tracked CO2 levels, and S6 and S7 were both passive infrared (PIR) motion sensors. The sensors were arranged in a star configuration. The PIR motion sensors were deployed on the ceiling to maximize their field of view for optimal motion detection. An edge node periodically compiled data from all sensor nodes.
 
-
-# Figures
------------------- 
-NOT SURE ABOUT THIS PART
-1. Architectural Diagram of Neural Network Model: A schematic visualization delineating the architecture, inclusive of layers, nodes, and activation functions employed, will provide insights into the neural network's structure.
-2. Confusion Matrices Across Models: Visual confusion matrices for each classification algorithm will facilitate a more immediate understanding of class misclassifications.
-3. Feature Importance Visualization: For ensemble tree-based models like Random Forest and Gradient Boosting, a bar graph quantifying feature importance could offer additional interpretive dimensions.
-4. Principal Component Analysis (PCA) Results: A bar chart elucidating the variance explained by each principal component can validate the dimensionality reduction approach.
-5. Performance Metrics Comparison: Utilize bar graphs or line charts to compare performance metrics such as accuracy and MSE across various models for both the original dataset and the PCA-reduced dataset.
-6. Hyperparameter Sensitivity Analysis: If hyperparameter tuning was executed, a graphical representation depicting performance variations against different hyperparameters can be presented.
-7. Learning Curves for Model Training: Learning curves plotted against epochs or iterations can aid in diagnosing overfitting or underfitting tendencies in the models.
-------------------
-
 # Methods
 
 ## Data Exploration and Preprocessing
@@ -191,8 +178,9 @@ x_train_os, x_test_os, y_train_os, y_test_os = train_test_split(X_resampled, y_r
 ### Summary of Results
 Below is a summary of the train and test accuracy and MSE scores for each of the 8 models. The green highlight indicates the model with the best outcome - for accuracy this would be the model that scored closest to 1.0, and for MSE this would be the model that scored closest to 0.0. The orange highlight is the model with the second best outcome. We felt it was necessary to not just consider the best outcome, because sometimes overly high accuracy or overly low MSE can be a result of overfitting or datasets that aren’t complex enough to begin with. To compare the average train and test accuracy and MSE scores for the 3 different dataset variations, the blue highlight indicates best outcome and the purple highlight indicates second best outcome.
 
-Summary of Results Table:
-![ECS 171 - Model Results - Standard, PCA, Oversampled](https://github.com/jordlim/ecs171project/assets/115687850/af230352-4097-413d-9ac9-0352be23910e)
+| ![ECS 171 - Model Results - Standard, PCA, Oversampled](https://github.com/jordlim/ecs171project/assets/115687850/af230352-4097-413d-9ac9-0352be23910e) | 
+|:--:| 
+| *Summary of Results Table* |
 
 # Discussion
 ## Data Exploration
@@ -200,13 +188,24 @@ The first step we took for data exploration was to look through the dataset and 
 
 To visualize how the different attributes in the data influenced one another, we built a correlation matrix consisting of all of the factors in our data. Since our data had multiple sensors for each type (4 for temperature, 4 for light, etc.) each corresponding to different areas of the room, we initially believed that the sensors for each type (ex. each of the four temperature, light, and sound sensors) would be highly correlated with one another. Instead, our team noticed that different sensors (though the same type) exhibited noteable differences in predictive impact for room occupancy. For example, in the correlation matrix S1_Temp has a 0.7 correlation with room occupancy and S1-3_Temp all have correlations of 0.65+, but S4_temp has a much lower correlation value of 0.53. To make sense of these sort of differences, we sourced a diagram of sensor placement that was associated with the dataset. This helps provide some context to differences in sensor outputs that we saw during data exploration. For example, one explanation for the differences in Temp sensor correlation could be because the placement of sensor S4 is in the upper right corner of the room, far from central node N and by a window.
 
-![Sensor Room Placement Diagram](https://github.com/jordlim/ecs171project/assets/115687850/bbcb0763-c36e-4c92-ba9d-3cb4c5e03cdf)
+| ![Sensor Room Placement Diagram](https://github.com/jordlim/ecs171project/assets/115687850/bbcb0763-c36e-4c92-ba9d-3cb4c5e03cdf) | 
+|:--:| 
+| *Diagram of Sensor Placements Throughout the Room* |
 
 We further visualized the data by plotting time series plots of the data for each sensor (e.g. temperature, light, sound, etc.) in order to visualize data trends. Specifically, we separated the dataset into its different data types, one for each sensor type, and plotted each sensor type against the date and time so we could study how the values change throughout the day. This was able to give us a clear visualization of each attribute and its trends over time. From this, we noticed many peaks in sensor output intensity during the first 3 and last 2 days of the experiment, with more minimal steady growth for the middle 10-14 days. Below are a few examples of the time series plots to demonstrate these peaks, such as for temperature, light, and CO2 concentration.
 
-![ECS 171 - Temperature Over Time](https://github.com/jordlim/ecs171project/assets/115687850/a27597e5-b867-47db-9417-91ab927471db)
-![ECS 171 - Light Over Time](https://github.com/jordlim/ecs171project/assets/115687850/dd2e48dc-fade-45d9-9d3b-555656419fea)
-![ECS 171 - CO2 Over Time](https://github.com/jordlim/ecs171project/assets/115687850/f186a233-d293-49ea-8533-78de7d305242)
+| ![ECS 171 - Temperature Over Time](https://github.com/jordlim/ecs171project/assets/115687850/a27597e5-b867-47db-9417-91ab927471db) | 
+|:--:| 
+| *Temperature Over Time from Four Sensors* |
+
+
+| ![ECS 171 - Light Over Time](https://github.com/jordlim/ecs171project/assets/115687850/dd2e48dc-fade-45d9-9d3b-555656419fea) | 
+|:--:| 
+| *Light Over Time from Four Sensors* |
+
+| ![ECS 171 - CO2 Over Time](https://github.com/jordlim/ecs171project/assets/115687850/f186a233-d293-49ea-8533-78de7d305242) | 
+|:--:| 
+| *CO2 Measurements Over Time* |
 
 ## Data Preprocessing
 During data exploration, we noticed that attributes like temperature (in Celsius) changed by the hundredths, while other attributes such as light (in Lux) changed much more drastically on the order of ones and tens. Because the range of the different axis are very different between each sensor type, we felt that the relationship was unclear. Some data points from the pair plots were also skewed or cluttered together with several points being significantly more distinct. Because the sensors from the experiment measured different variables with different units, we decided to normalize the data in order to reduce the rate of change differences between variable measurements for different observations. To standardize the data, we used MinMaxScaler to standardize all numerical features so that their values fall between 0 and 1. We also decided on using TensorFlow’s ‘to_categorical’ function to convert the room occupancy status (room_occupancy) into one-hot encoded form for multi-class analysis.
@@ -283,15 +282,20 @@ In order to make sure that the models are not overfitting the data or that there
 It's very rare to see a model perform so well, which is good as predicting the number of people in a room has many day to day use cases. Numerous companies can take advantage of passive sensors to calculate the number of room occupants at a given time. Whether it's an electrical company optimizing energy usage inside a building or emergency services deciphering a hostage situation by using sensor outputs to determine the number of people inside, there are many different ways we can use the results obtained from this project in real-world scenarios. 
 
 # Conclusion
-In our project, we conducted in-depth research on the prediction of the number of people in the room from different perspectives. We adopted different preprocessing techniques and multiple machine learning models, including neural networks, logistic regression, decision trees, and support vector machines, to address this issue. It is particularly noteworthy that we addressed the issue of category imbalance in the dataset and balanced it using random oversampling techniques. In addition, we also attempted dimensionality reduction methods, such as principal component analysis (PCA), to investigate whether there are insignificant characteristics. We also know that different sensors have different effects on room occupancy, which may be due to the placement of the sensors. This discovery is valuable for deeper research and practical applications. Moreover, through cross validation and multiple experiments, we confirmed that the model did not overfit and performed well in predicting the number of people in the room, approaching 100% on the Average Score. The project successfully solved the problem of predicting the number of people in a room and demonstrated various data processing and model training methods.
-Future directions:
-This project is not only expected to play a role in the business environment, but also has important applications in emergency services and public safety. When facing emergency situations such as hostage negotiations or natural disasters, use models to quickly and accurately identify the number of people in hazardous areas. Potential risks can also be prevented through models. Helps to more effectively help people avoid danger.
+In our project, we conducted in-depth research on the prediction of the number of people in the room from different perspectives. We adopted different preprocessing techniques and multiple machine learning models, including neural networks, logistic regression, decision trees, and support vector machines, to address this issue. It is particularly noteworthy that we addressed the issue of category imbalance in the dataset and balanced it using random oversampling techniques. In addition, we also attempted dimensionality reduction methods, such as principal component analysis (PCA), to investigate whether there are insignificant characteristics. We also know that different sensors have different effects on room occupancy, which may be due to the placement of the sensors. This discovery is valuable for deeper research and practical applications. Moreover, through cross validation and multiple experiments, we confirmed that the model did not overfit and performed well in predicting the number of people in the room, approaching 100% on the Average Score. The project successfully solved the problem of predicting the number of people in a room and demonstrated various data processing and model training methods. We expect models like this to play a role in the business environment, but it also has important applications in emergency services and public safety. When facing emergency situations such as hostage negotiations or natural disasters, we can potentially use models like this to quickly and accurately identify the number of people in hazardous areas. If executed correctly potential risks can be prevented. This project is a small showing of the potential of machine learning in real world scenarios.
 
 # Collaboration
 Jamie Wu - jmewu@ucdavis.edu - GitHub: jamtoabeat\
 - 
 Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
 - 
+- Initialized repository with needed files and provided instructions for efficient remote collaboration
+- Attended team meetings and collaborated on Google Docs to do write-ups for the various milestone assignments
+- Wrote starter code to initialize dataset, split into different types for plots, and resized correlation matrix
+- Added various comments in code and reworked some dataframes
+- Formatted report into required sections for team to work on and added text
+- Formatted unlabeled figures
+  
 Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 - 
 Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
