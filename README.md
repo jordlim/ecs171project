@@ -66,8 +66,16 @@ NOT SURE ABOUT THIS PART
 
 ## Metrics for 3 Model Formats (MSE and Accuracy)
 ### Metrics for Standard Dataset
-### Metrics for PCA Datase
+![ECS 171 - Standard MSE](https://github.com/jordlim/ecs171project/assets/115687850/2cac7c95-5000-438c-92cd-b3578e49a5f0)
+![ECS 171 - Standard Accuracy](https://github.com/jordlim/ecs171project/assets/115687850/14dfcc7d-45f0-405d-8253-18777a48d28d)
+
+### Metrics for PCA Dataset
+![ECS 171 - PCA MSE](https://github.com/jordlim/ecs171project/assets/115687850/af8ed86d-9504-4a97-9dc1-88c33849fb0a)
+![ECS 171 - PCA Accuracy](https://github.com/jordlim/ecs171project/assets/115687850/4bead484-1ffc-4570-a488-62067d228596)
+
 ### Metrics for Oversampled Dataset
+![ECS 171 - Oversampled MSE](https://github.com/jordlim/ecs171project/assets/115687850/87ea0e1f-54ae-440d-94bb-9eda1856e525)
+![ECS 171 - Oversampled Accuracy](https://github.com/jordlim/ecs171project/assets/115687850/e0d33a8d-b448-4405-94de-653b01e18782)
 
 # Methods
 
