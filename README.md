@@ -308,6 +308,9 @@ Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 - 
 Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
 - 
+- Attended team meetings and collaborated on Google Docs to do write-ups for the various milestone assignments
+- Organized and put finishing touches on parts of the write-up
+  
 Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 -
 - Collaborated on Google docs to work on milestone assignments
