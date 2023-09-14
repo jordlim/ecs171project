@@ -301,6 +301,8 @@ Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
 Elson Jian - egjian@ucdavis.edu - GitHub: ElsonJian\
 - 
 Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
-- 
+-
+- Collaborated on Google docs to work on milestone assignments
+-  
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 - 
