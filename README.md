@@ -310,8 +310,9 @@ Jordan Lim - jflim@ucdavis.edu - GitHub: jordlim \
 - Added various comments in code and reworked some dataframes
 - Formatted report into required sections for team to work on and added text
 - Formatted unlabeled figures
-  
+-
 Rohan Arumugam - rarumugam@ucdavis.edu - GitHub: rohan-arumugam\
+-
 - Did initial data preprocessing, exploratory data analysis, and data transformations
 - Wrote functions to build models, perform cross validation, and create summary graphs
 - Collaborate in team meetings and work on milestone assignments
