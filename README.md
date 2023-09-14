@@ -314,3 +314,5 @@ Hyunkyong (HK) Boo - hboo@ucdavis.edu - GitHub: hboo0507\
 
 Juntao Wang - jutwang@ucdavis.edu - GitHub: JuWT
 - 
+- Collaborate on Google Docs and participate in milestone tasks
+- Add the required text to the report
